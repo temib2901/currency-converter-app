@@ -13,6 +13,7 @@ public class Logger {
             System.out.println(logs);
         } catch (IOException e) {
             System.out.println(e.getMessage());
+            
         }
     }
 

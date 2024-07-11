@@ -111,7 +111,8 @@ public class CurrencyConverterGUI {
         CurrencyResponse cResponse = exchangeService.exchangeCurrencies(cRequest);
         Double result = cResponse.getConversionResult();
         double conversionRate = cResponse.getConversionRate();
-        String printOut = "user changed " + amount + fromCurrency + " to " + result+toCurrency + " at " + cResponse.getLocalDateTime().toString();
+      //logs
+        String printOut = "user changed " + amount + fromCurrency + " to " + result+toCurrency + " at " + cResponse.getDateTime();
         String sResult = result.toString();
 
         conversionRateLabel.setText("Conversion rate is :" + conversionRate);

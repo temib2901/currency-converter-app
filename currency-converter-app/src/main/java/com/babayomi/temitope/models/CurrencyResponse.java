@@ -1,10 +1,14 @@
 package com.babayomi.temitope.models;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class CurrencyResponse {
 
 	public CurrencyResponse() {
+		LocalDateTime localDateTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		this.dateTime = localDateTime.format(formatter);
 	}
 
 	public CurrencyResponse(String baseCurrency, String targetCurrency, double conversionRate, double conversionResult) {
@@ -12,22 +16,24 @@ public class CurrencyResponse {
 		this.targetCurrency = targetCurrency;
 		this.conversionRate = conversionRate;
 		this.conversionResult = conversionResult;
-		this.localDateTime = LocalDateTime.now();
+
+		LocalDateTime localDateTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		this.dateTime = localDateTime.format(formatter);
 	}
 
 	private String baseCurrency;
 	private String targetCurrency;
 	private double conversionRate;
 	private double conversionResult;
-	private LocalDateTime localDateTime;
-	
-	
-	public LocalDateTime getLocalDateTime() {
-		return localDateTime;
+	private String dateTime;
+
+	public String getDateTime() {
+		return dateTime;
 	}
 
-	public void setLocalDateTime(LocalDateTime localDateTime) {
-		this.localDateTime = localDateTime;
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
 	}
 
 	public String getBaseCurrency() {
@@ -62,4 +68,14 @@ public class CurrencyResponse {
 		this.conversionResult = conversionResult;
 	}
 
+	@Override
+	public String toString() {
+		return "CurrencyResponse{" +
+				"baseCurrency='" + baseCurrency + '\'' +
+				", targetCurrency='" + targetCurrency + '\'' +
+				", conversionRate=" + conversionRate +
+				", conversionResult=" + conversionResult +
+				", dateTime='" + dateTime + '\'' +
+				'}';
+	}
 }
