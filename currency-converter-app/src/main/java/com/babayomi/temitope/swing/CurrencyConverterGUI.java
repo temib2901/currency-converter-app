@@ -73,7 +73,7 @@ public class CurrencyConverterGUI {
         convertButton.addActionListener(button -> {
             try {
                 convertCurrency();
-                //promting the user to make another exchange
+                //prompting the user to make another exchange
                 convertButton.setText("Another Exchange?");
 
             } catch (IOException ex) {
@@ -105,7 +105,7 @@ public class CurrencyConverterGUI {
         ExchangeService exchangeService = new ExchangeService();
         CurrencyResponse cResponse = exchangeService.exchangeCurrencies(cRequest);
         Double result = cResponse.getConversionResult();
-        String printOut = "user changed " + amount + fromCurrency + " to " + result+toCurrency + " at " + cResponse.getLdt().toString();
+        String printOut = "user changed " + amount + fromCurrency + " to " + result+toCurrency + " at " + cResponse.getLocalDateTime().toString();
         String sResult = result.toString();
 
         resultLabel.setText("Result: " + sResult);
