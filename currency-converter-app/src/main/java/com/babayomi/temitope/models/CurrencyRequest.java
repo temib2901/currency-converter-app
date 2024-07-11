@@ -1,14 +1,14 @@
 package com.babayomi.temitope.models;
 
-public class Request {
+public class CurrencyRequest {
 	private String baseCurrency;
 	private String targetCurrency;
 	private double amount;
 
-	public Request() {
+	public CurrencyRequest() {
 	}
 
-	public Request(String baseCurrency, String targetCurrency, double amount) {
+	public CurrencyRequest(String baseCurrency, String targetCurrency, double amount) {
 		this.baseCurrency = baseCurrency;
 		this.targetCurrency = targetCurrency;
 		this.amount = amount;
