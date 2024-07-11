@@ -14,6 +14,7 @@ public class CurrencyConverterGUI {
     private static JTextField inputAmount;
     private static JComboBox<String> baseBox;
     private static JComboBox<String> targetBox;
+    private static JLabel conversionRateLabel;
     private static JLabel resultLabel;
     private static final String currencies = "AED AFN ALL AMD ANG AOA ARS AUD AWG AZN BAM BBD BDT BGN BHD BIF BMD BND BOB BRL BSD BTN BWP BYN BZD CAD CDF CHF CLP CNY COP CRC CUP CVE CZK DJF DKK DOP DZD EGP ERN ETB EUR FJD FKP FOK GBP GEL GGP GHS GIP GMD GNF GTQ GYD HKD HNL HRK HTG HUF IDR ILS IMP INR IQD IRR ISK JEP JMD JOD JPY KES KGS KHR KID KMF KRW KWD KYD KZT LAK LBP LKR LRD LSL LYD MAD MDL MGA MKD MMK MNT MOP MRU MUR MVR MWK MXN MYR MZN NAD NGN NIO NOK NPR NZD OMR PAB PEN PGK PHP PKR PLN PYG QAR RON RSD RUB RWF SAR SBD SCR SDG SEK SGD SHP SLE SOS SRD SSP STN SYP SZL THB TJS TMT TND TOP TRY TTD TVD TWD TZS UAH UGX USD UYU UZS VES VND VUV WST XAF XCD XDR XOF XPF YER ZAR ZMW ZWL";
     private static final String[] arrayCurrencies = currencies.split(" ");
@@ -22,7 +23,7 @@ public class CurrencyConverterGUI {
 
     public void convertTheseCurrencies () {
         frame = new JFrame("Currency Exchange");
-        frame.setSize(450, 400);
+        frame.setSize(450, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
 
@@ -64,8 +65,12 @@ public class CurrencyConverterGUI {
         resultLabel.setBounds(150, 250, 300, 30);
         frame.add(resultLabel);
 
+        conversionRateLabel = new JLabel("Conversion rate is:");
+        conversionRateLabel.setBounds(150, 300, 300, 30);
+        frame.add(conversionRateLabel);
+        
         JButton exitButton = new JButton("Exit");
-        exitButton.setBounds(150, 300, 150, 30);
+        exitButton.setBounds(150, 350, 150, 30);
         exitButton.setBackground(Color.RED);
         frame.add(exitButton);
 
@@ -105,9 +110,11 @@ public class CurrencyConverterGUI {
         ExchangeService exchangeService = new ExchangeService();
         CurrencyResponse cResponse = exchangeService.exchangeCurrencies(cRequest);
         Double result = cResponse.getConversionResult();
+        double conversionRate = cResponse.getConversionRate();
         String printOut = "user changed " + amount + fromCurrency + " to " + result+toCurrency + " at " + cResponse.getLocalDateTime().toString();
         String sResult = result.toString();
 
+        conversionRateLabel.setText("Conversion rate is :" + conversionRate);
         resultLabel.setText("Result: " + sResult);
         new Logger(printOut);
         //setting colour text
